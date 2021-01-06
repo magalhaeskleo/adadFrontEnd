@@ -28,7 +28,6 @@ import EditPedido from './editPedido';
 import ViewPedido from './viewPedido';
 
 const columns = [
-  { id: 'ordem', label: 'Ordem', maxWidth: 42, align: 'center' },
   {
     id: 'identificacao',
     label: 'Identificação',
@@ -39,28 +38,26 @@ const columns = [
   { id: 'quantidade', label: 'Quantidade', maxWidth: 100, align: 'center' },
   { id: 'total', label: 'Total', maxWidth: 80, align: 'center' },
   { id: 'status', label: 'Status', maxWidth: 80, align: 'center' },
-  { id: 'solicitante', label: 'Solicitante', maxWidth: 100, align: 'center' },
+  { id: 'nucleo', label: 'Nucleo', maxWidth: 100, align: 'center' },
   { id: 'action', label: '', maxWidth: 55, align: 'right' },
 ];
 
 function createData(
-  ordem,
   identificacao,
   data,
   quantidade,
   total,
   status,
-  solicitante,
+  nucleo,
   action
 ) {
   return {
-    ordem,
     identificacao,
     data,
     quantidade,
     total,
     status,
-    solicitante,
+    nucleo,
     action,
   };
 }
@@ -118,7 +115,7 @@ export default function TablePedidos({
     total,
     loading,
     setItemSelected,
-    setEdit,
+
     dataListPedido,
     setLoading,
     itemSelected,
@@ -129,7 +126,6 @@ export default function TablePedidos({
     if (list.length > 0) {
       const listFormat = list.map((item) =>
         createData(
-          item.pedido.id,
           <p style={{ color: COLOR_STATUS_PEDIDO[item.pedido.status] }}>
             {item.pedido.description}
           </p>,
@@ -137,7 +133,7 @@ export default function TablePedidos({
           item.pedido.quantidadeTotal,
           `R$ ${item.pedido.valortotal}, 00`,
           <StatusPedido status={item.pedido.status} />,
-          item.pedido.personal.fullName,
+          item.pedido.nucleo.name,
           action(item.pedido, item.list, item.statusPedido)
         )
       );
@@ -150,7 +146,6 @@ export default function TablePedidos({
   useEffect(() => {
     const listFormat = dataListPedido.map((item) =>
       createData(
-        item.pedido.id,
         <p style={{ color: COLOR_STATUS_PEDIDO[item.pedido.status] }}>
           {item.pedido.description}
         </p>,
@@ -158,7 +153,7 @@ export default function TablePedidos({
         item.pedido.quantidadetotal,
         `R$ ${item.pedido.valortotal}, 00`,
         <StatusPedido status={item.pedido.status} />,
-        item.pedido.personal.fullName,
+        item.pedido.nucleo.name,
         action(item.pedido, item.list, item.statusPedido)
       )
     );
@@ -171,7 +166,6 @@ export default function TablePedidos({
     setAnchorEl(event.currentTarget);
   };
   function handleClickView(event, pedido, list, statusPedido) {
-    console.log('ta chebndo no handle', pedido, list, statusPedido);
     setItemSelected({ pedido, list, statusPedido });
     setOpenView(true);
   }
@@ -296,11 +290,7 @@ export default function TablePedidos({
                 align={column.align}
                 variant='head'
                 className={
-                  index === 0 ||
-                  index === 2 ||
-                  index === 3 ||
-                  index === 5 ||
-                  index === 6
+                  index === 2 || index === 3 || index === 4 || index === 6
                     ? classes.headerTableHide
                     : ''
                 }
@@ -323,7 +313,7 @@ export default function TablePedidos({
                   return (
                     <TableCell
                       className={
-                        i === 0 || i === 2 || i === 3 || i === 5 || i === 6
+                        i === 2 || i === 3 || i === 4 || i === 6
                           ? classes.headerTableHide
                           : ''
                       }

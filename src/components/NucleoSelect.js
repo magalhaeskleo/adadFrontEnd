@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleSelectNucleo({ callbackNucleo }) {
+export default function SimpleSelectNucleo({ callbackNucleo, initialValues }) {
   const classes = useStyles();
   const [nucleos, setNucleos] = useState([]);
   const [disabled, setDisabled] = useState(true);
@@ -32,7 +32,14 @@ export default function SimpleSelectNucleo({ callbackNucleo }) {
   async function getData() {
     const response = await api.get('/allsimpleactivate');
     setNucleos(response.data);
-    callbackNucleo(user.nucleoid);
+    console.log('O init value', initialValues);
+    if (initialValues.nucleoid) {
+      setNucleo(initialValues.nucleoid);
+      callbackNucleo(initialValues.nucleoid);
+    } else {
+      setNucleo(user.nucleoid);
+      callbackNucleo(user.nucleoid);
+    }
 
     if (user.admin) {
       setDisabled(false);

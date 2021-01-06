@@ -743,7 +743,10 @@ export default function AddPeople({
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                <NucleoSelect callbackNucleo={callbackNucleo} />
+                <NucleoSelect
+                  callbackNucleo={callbackNucleo}
+                  initialValues={initialValues}
+                />
               </div>
             </div>
 

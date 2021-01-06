@@ -9,6 +9,7 @@ import { AttachMoney, FormatListNumbered, People } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
 import SkeletonCard from '../../../components/SkeletonCard';
 import { PeopleProvider } from '../../../context/app/people';
+import { useAuth } from '../../../context/auth';
 import api from '../../../service/api';
 
 const useStyles = makeStyles((theme) => ({
@@ -50,9 +51,19 @@ export default function Uniforme() {
   const [verificando, setVerificando] = useState(0);
   const [matriculas, setMatriculas] = useState(0);
   const [loading, setLoading] = useState(false);
+  const { user } = useAuth();
 
   async function getStatuPedido() {
-    const resp = await api.get('/pedido/statusList');
+    let resp = [];
+    if (user.admin) {
+      resp = await api.get('/pedido/statusList');
+    } else {
+      resp = await api.get('/pedido/statusListForNucleo', {
+        headers: {
+          nucleoid: Number(user.nucleoid),
+        },
+      });
+    }
     if (resp.data) {
       setConcluidos(resp.data.concluidos);
       setVerificando(resp.data.verificando);
@@ -60,7 +71,17 @@ export default function Uniforme() {
   }
 
   async function getMatriculasEfetuadas() {
-    const resp = await api.get('/personal/matriculas');
+    let resp = [];
+    if (user.admin) {
+      resp = await api.get('/personal/matriculas');
+    } else {
+      resp = await api.get('/personal/matriculasForNucleo', {
+        headers: {
+          nucleoid: Number(user.nucleoid),
+        },
+      });
+    }
+
     console.log('resp', resp.data);
     if (resp.data) {
       setMatriculas(resp.data.length);

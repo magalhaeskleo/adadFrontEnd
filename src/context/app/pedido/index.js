@@ -41,11 +41,21 @@ export const PedidoProvider = ({ children }) => {
   }, [loading]);
 
   async function getDataServer(page) {
-    const response = await api.get('pedido/all', {
-      headers: {
-        page: Number(page),
-      },
-    });
+    let response = '';
+    if (user.admin) {
+      response = await api.get('pedido/all', {
+        headers: {
+          page: Number(page),
+        },
+      });
+    } else {
+      response = await api.get('pedido/allForNucleo', {
+        headers: {
+          page: Number(page),
+          nucleoid: Number(user.nucleoid),
+        },
+      });
+    }
 
     if (!response.data.error) {
       setTotal(response.data.total);

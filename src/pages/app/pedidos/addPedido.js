@@ -44,13 +44,7 @@ export default function Addpage({
   //  initialValues,
   timeLine,
 }) {
-  const [statusPedido, setStatusPedido] = useState([
-    formatDate,
-    '0',
-    '0',
-    '0',
-    '0',
-  ]);
+  const [statusPedido] = useState([formatDate, '0', '0', '0', '0']);
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -129,6 +123,7 @@ export default function Addpage({
     const form = {
       description,
       personalid: user.id,
+      nucleoid: user.nucleoid,
       listItens,
       valorTotal,
       quantidadeTotal,
