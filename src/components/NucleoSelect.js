@@ -33,7 +33,7 @@ export default function SimpleSelectNucleo({ callbackNucleo, initialValues }) {
     const response = await api.get('/allsimpleactivate');
     setNucleos(response.data);
     console.log('O init value', initialValues);
-    if (initialValues.nucleoid) {
+    if (initialValues && initialValues.nucleoid) {
       setNucleo(initialValues.nucleoid);
       callbackNucleo(initialValues.nucleoid);
     } else {

@@ -14,11 +14,13 @@ import {
   Radio,
   RadioGroup,
   Select,
+  Snackbar,
   TextField,
   Typography,
 } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
 import { CameraAlt, Computer, Search } from '@material-ui/icons';
+import MuiAlert from '@material-ui/lab/Alert';
 import { Form, Formik } from 'formik';
 import MuiPhoneNumber from 'material-ui-phone-number';
 import React, { useEffect, useState } from 'react';
@@ -96,6 +98,8 @@ export default function AddPeople({
   const [perfilid, setPerfilid] = useState(7);
   const [errorFile, setErrorFile] = useState('');
   const { user } = useAuth();
+  const horizontal = 'center';
+  const vertical = 'top';
 
   useEffect(() => {
     if (edition) {
@@ -107,6 +111,10 @@ export default function AddPeople({
       setUrlPhoto('');
     }
   }, [edition]);
+
+  function Alert(props) {
+    return <MuiAlert elevation={6} variant='filled' {...props} />;
+  }
 
   function closeModal() {
     setFileSelect('');
@@ -149,7 +157,49 @@ export default function AddPeople({
     return data;
   }
 
+  function validandoCPF(cpf) {
+    // Elimina CPFs invalidos conhecidos
+    if (
+      cpf === '00000000000' ||
+      cpf === '11111111111' ||
+      cpf === '22222222222' ||
+      cpf === '33333333333' ||
+      cpf === '44444444444' ||
+      cpf === '55555555555' ||
+      cpf === '66666666666' ||
+      cpf === '77777777777' ||
+      cpf === '88888888888' ||
+      cpf === '99999999999'
+    )
+      return false;
+    // Valida 1o digito
+    let add = 0;
+    for (let i = 0; i < 9; i++) add += parseInt(cpf.charAt(i)) * (10 - i);
+    let rev = 11 - (add % 11);
+    if (rev === 10 || rev === 11) rev = 0;
+    if (rev !== parseInt(cpf.charAt(9))) return false;
+    // Valida 2o digito
+    add = 0;
+    for (let i = 0; i < 10; i++) add += parseInt(cpf.charAt(i)) * (11 - i);
+    rev = 11 - (add % 11);
+    if (rev === 10 || rev === 11) rev = 0;
+    if (rev !== parseInt(cpf.charAt(10))) return false;
+    return true;
+  }
+
+  const [message, setMessage] = useState('');
+  const [severity, setSeverity] = useState('success');
+  const [openaAlert, setOpenAlert] = useState(false);
+
   async function sendMatricula(form) {
+    if (!validandoCPF(form.cpf)) {
+      setMessage('O cpf esta inválido');
+      setSeverity('warning');
+      setOpenAlert(true);
+
+      return;
+    }
+
     let avatar = '';
 
     if (!fileSelect) {
@@ -199,7 +249,7 @@ export default function AddPeople({
 
   const validation = yup.object().shape({
     fullName: yup.string().required('Campo obrigatório'),
-    cpf: yup.string().required('Campo obrigatório'),
+    cpf: yup.string().min(11, 'Número inválido').required('Campo obrigatório'),
     email: yup.string().email('E-mail inválido').required('Campo obrigatório'),
     phone: yup
       .string()
@@ -783,6 +833,16 @@ export default function AddPeople({
         <DialogContent>
           <DialogContentText id='alert-dialog-description'>
             {formikForm}
+            <Snackbar
+              open={openaAlert}
+              anchorOrigin={{ vertical, horizontal }}
+              autoHideDuration={5000}
+              onClose={() => setOpenAlert(false)}
+            >
+              <Alert onClose={() => setOpenAlert(false)} severity={severity}>
+                {message}
+              </Alert>
+            </Snackbar>
           </DialogContentText>
         </DialogContent>
       </Dialog>

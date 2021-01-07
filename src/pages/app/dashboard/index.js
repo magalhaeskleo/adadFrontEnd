@@ -50,6 +50,7 @@ export default function Uniforme() {
   const [concluidos, setConcluidos] = useState(0);
   const [verificando, setVerificando] = useState(0);
   const [matriculas, setMatriculas] = useState(0);
+  const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
 
@@ -82,9 +83,33 @@ export default function Uniforme() {
       });
     }
 
-    console.log('resp', resp.data);
     if (resp.data) {
       setMatriculas(resp.data.length);
+    }
+  }
+  async function getValortotal() {
+    let resp = [];
+    if (user.admin) {
+      resp = await api.get('/financeiro/total');
+    } else {
+      resp = await api.get('/financeiro/fornucleo', {
+        headers: {
+          nucleoid: Number(user.nucleoid),
+        },
+      });
+    }
+
+    if (resp.data) {
+      let total = 0;
+      resp.data.list.forEach((element) => {
+        if (element.type === 'saida') {
+          total = Number(total) - Number(element.valor);
+        } else {
+          total += Number(element.valor);
+        }
+      });
+
+      setTotal(total);
     }
   }
 
@@ -138,7 +163,7 @@ export default function Uniforme() {
           )}
           {card(
             'Caixa',
-            'R$ 500, 00',
+            `R$ ${total}, 00`,
             <AttachMoney className={classes.iconStyle} />,
             '#B92E58'
           )}
@@ -164,6 +189,7 @@ export default function Uniforme() {
     async function getDatas() {
       getStatuPedido();
       getMatriculasEfetuadas();
+      getValortotal();
       await new Promise((res) => setTimeout(res, 1000));
       setLoading(false);
     }

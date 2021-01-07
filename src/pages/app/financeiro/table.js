@@ -27,11 +27,12 @@ const columns = [
   { id: 'descricao', label: 'Descricao', maxWidth: 100, align: 'center' },
   { id: 'type', label: 'Tipo', maxWidth: 80, align: 'center' },
   { id: 'valor', label: 'Valor', maxWidth: 80, align: 'center' },
+  { id: 'nucleo', label: 'Nucleo', maxWidth: 50, align: 'center' },
   { id: 'action', label: '', maxWidth: 50, align: 'right' },
 ];
 
-function createData(id, descricao, type, valor, action) {
-  return { id, descricao, type, valor, action };
+function createData(id, descricao, type, valor, nucleo, action) {
+  return { id, descricao, type, valor, nucleo, action };
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -137,12 +138,21 @@ export default function StickyHeadTable({
   );
 
   async function getData(newPage) {
-    const resp = await api.get('/financeiro', {
-      headers: {
-        page: newPage,
-        nucleoid: user.nucleoid,
-      },
-    });
+    let resp = [];
+    if (user.admin) {
+      resp = await api.get('/financeiro/all', {
+        headers: {
+          page: newPage,
+        },
+      });
+    } else {
+      resp = await api.get('/financeiro', {
+        headers: {
+          page: newPage,
+          nucleoid: user.nucleoid,
+        },
+      });
+    }
 
     if (resp.data) {
       const listFormat = resp.data.list.map((item) =>
@@ -155,6 +165,7 @@ export default function StickyHeadTable({
             <AddCircleOutline htmlColor='green' />
           ),
           item.type === 'saida' ? `-${item.valor}` : item.valor,
+          item.nucleo.name,
           action(item)
         )
       );
