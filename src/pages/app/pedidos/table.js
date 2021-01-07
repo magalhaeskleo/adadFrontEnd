@@ -31,12 +31,12 @@ const columns = [
   {
     id: 'identificacao',
     label: 'Identificação',
-    maxWidth: 120,
+    maxWidth: 90,
     align: 'left',
   },
   { id: 'data', label: 'Data', maxWidth: 95, align: 'center' },
   { id: 'quantidade', label: 'Quantidade', maxWidth: 100, align: 'center' },
-  { id: 'total', label: 'Total', maxWidth: 80, align: 'center' },
+  { id: 'total', label: 'Total', maxWidth: 100, align: 'center' },
   { id: 'status', label: 'Status', maxWidth: 80, align: 'center' },
   { id: 'nucleo', label: 'Nucleo', maxWidth: 100, align: 'center' },
   { id: 'action', label: '', maxWidth: 55, align: 'right' },
@@ -290,7 +290,7 @@ export default function TablePedidos({
                 align={column.align}
                 variant='head'
                 className={
-                  index === 2 || index === 3 || index === 4 || index === 6
+                  index === 1 || index === 2 || index === 4
                     ? classes.headerTableHide
                     : ''
                 }
@@ -313,7 +313,7 @@ export default function TablePedidos({
                   return (
                     <TableCell
                       className={
-                        i === 2 || i === 3 || i === 4 || i === 6
+                        i === 1 || i === 2 || i === 4
                           ? classes.headerTableHide
                           : ''
                       }

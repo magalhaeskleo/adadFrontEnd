@@ -32,8 +32,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const now = new Date();
-const formatDate = `${now.getDate()}/${
-  now.getMonth() + 1
+const formatDate = `${
+  now.getDate() < 9 ? '0' + now.getDate() : now.getDate()
+}/${
+  now.getMonth() < 9 ? '' + now.getMonth() + 1 : now.getMonth()
 }/${now.getFullYear()}`;
 
 export default function TimelineComp({ statusPedido }) {

@@ -33,10 +33,6 @@ import api from '../../../service/api';
 import TableItensPedidos from './tableItensPedidos';
 
 const now = new Date();
-const formatDate = `${now.getDate()}/${
-  now.getMonth() + 1
-}/${now.getFullYear()}`;
-
 export default function Addpage({
   openModal,
   setOpenModal,
@@ -44,6 +40,12 @@ export default function Addpage({
   //  initialValues,
   timeLine,
 }) {
+  const formatDate = `${
+    now.getDate() < 9 ? '0' + now.getDate() : now.getDate()
+  }/${
+    now.getMonth() < 9 ? '' + now.getMonth() + 1 : now.getMonth()
+  }/${now.getFullYear()}`;
+
   const [statusPedido] = useState([formatDate, '0', '0', '0', '0']);
 
   const useStyles = makeStyles((theme) => ({

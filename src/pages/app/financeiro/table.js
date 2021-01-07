@@ -1,4 +1,10 @@
-import { IconButton, Menu, MenuItem, TextField } from '@material-ui/core/';
+import {
+  IconButton,
+  Menu,
+  MenuItem,
+  TextField,
+  Typography,
+} from '@material-ui/core/';
 import Fab from '@material-ui/core/Fab';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
@@ -158,7 +164,12 @@ export default function StickyHeadTable({
       const listFormat = resp.data.list.map((item) =>
         createData(
           item.id,
-          item.descricao,
+          <Typography
+            style={{ color: item.type === 'saida' ? 'red' : 'green' }}
+          >
+            {item.descricao}
+          </Typography>,
+
           item.type === 'saida' ? (
             <RemoveCircleOutline htmlColor='red' />
           ) : (
@@ -226,7 +237,7 @@ export default function StickyHeadTable({
                 key={column.id}
                 align={column.align}
                 className={
-                  index > 0 && index < 3 ? classes.headerTableHide : ''
+                  index > 0 && index < 2 ? classes.headerTableHide : ''
                 }
                 style={{
                   maxWidth: column.maxWidth,
@@ -245,7 +256,7 @@ export default function StickyHeadTable({
                   const value = row[column.id];
                   return (
                     <TableCell
-                      className={i > 0 && i < 3 ? classes.headerTableHide : ''}
+                      className={i > 0 && i < 2 ? classes.headerTableHide : ''}
                       key={column.id}
                       align={column.align}
                       style={{
