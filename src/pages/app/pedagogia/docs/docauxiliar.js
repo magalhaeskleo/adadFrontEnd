@@ -66,10 +66,20 @@ export default function DocAuxiliar({ setPageReturn }) {
   }
 
   async function getData() {
-    const response = await api.get('/doc/setor', {
-      headers: { nucleoid: user.nucleoid, setor: 1 },
-    });
-    console.log('data', response.data);
+    let response = [];
+
+    if (user.perfilid === 8 || user.admin) {
+      response = await api.get('/doc/all', {
+        headers: { setor: 1 },
+      });
+
+      console.log('os documentos da pedagogia', response.data);
+    } else {
+      response = await api.get('/doc/setor', {
+        headers: { nucleoid: user.nucleoid, setor: 1 },
+      });
+    }
+    console.log('os documentos da pedagogia', response.data);
     setList(response.data);
   }
   useEffect(() => {

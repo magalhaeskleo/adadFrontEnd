@@ -131,7 +131,7 @@ function ResponsiveDrawer(props) {
   const theme = useTheme();
   const { user, logout } = useAuth();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [pageSelected, setPageSelected] = useState(0);
+  const [pageSelected, setPageSelected] = useState(user.perfilid === 8 ? 3 : 0);
 
   const [pageList] = useState([
     <Dashboard />,
@@ -176,19 +176,35 @@ function ResponsiveDrawer(props) {
       </div>
       <Divider />
       <List>
-        {menuItens.map((item) => (
+        {user.perfilid !== 8 ? (
+          menuItens.map((item) => (
+            <ListItem
+              button
+              key={item.id}
+              style={{
+                backgroundColor: item.id === pageSelected + 1 && '#CED8F6',
+              }}
+              onClick={() => setPageSelected(item.id - 1)}
+            >
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.name} />
+            </ListItem>
+          ))
+        ) : (
           <ListItem
             button
-            key={item.id}
+            key={1}
             style={{
-              backgroundColor: item.id === pageSelected + 1 && '#CED8F6',
+              backgroundColor: 1 === pageSelected + 1 && '#CED8F6',
             }}
-            onClick={() => setPageSelected(item.id - 1)}
+            onClick={() => setPageSelected(3)}
           >
-            <ListItemIcon>{item.icon}</ListItemIcon>
-            <ListItemText primary={item.name} />
+            <ListItemIcon>
+              <School />
+            </ListItemIcon>
+            <ListItemText primary={'Pedagogia'} />
           </ListItem>
-        ))}
+        )}
         {user.admin && (
           <>
             <ListItem

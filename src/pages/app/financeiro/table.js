@@ -160,6 +160,7 @@ export default function StickyHeadTable({
       });
     }
 
+    console.log('resp.data', resp.data);
     if (resp.data) {
       const listFormat = resp.data.list.map((item) =>
         createData(

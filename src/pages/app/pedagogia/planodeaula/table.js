@@ -126,7 +126,9 @@ export default function StickyHeadTable({
   const [dataList, setDataList] = useState([]);
 
   const [total, setTotal] = useState(0);
-  const [nucleoid, setNucleoId] = useState(1);
+  const [nucleoid, setNucleoId] = useState(
+    !user.admin || user.perfilid !== 8 ? user.nucleoid : 1
+  );
 
   const [selectedDate, setSelectedDate] = useState(moment());
   const [selectedYear, setSelectedYear] = useState(moment());
@@ -209,7 +211,7 @@ export default function StickyHeadTable({
         page: 1,
       },
     });
-
+    console.log('passou no plano filter', listFilter);
     setTotal(listFilter.data.total);
 
     if (listFilter.data.list.length > 0) {

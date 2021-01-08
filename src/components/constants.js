@@ -7,6 +7,7 @@ export const PERFIL_LIST = [
   { id: 5, name: 'Instrução' },
   { id: 6, name: 'Auxiliar de lider' },
   { id: 7, name: 'Adad' },
+  { id: 8, name: 'Pedagogia' },
 ];
 
 export const TAMANHO_INFANTIL = [2, 3, 4, 6, 8, 12, 16];

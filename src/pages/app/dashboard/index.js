@@ -101,6 +101,7 @@ export default function Uniforme() {
 
     if (resp.data) {
       let total = 0;
+      console.log('os valores', resp.data.list);
       resp.data.list.forEach((element) => {
         if (element.type === 'saida') {
           total = Number(total) - Number(element.valor);
