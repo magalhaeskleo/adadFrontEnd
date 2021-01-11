@@ -67,6 +67,7 @@ export default function DocAuxiliar({ setPageReturn }) {
 
   async function getData() {
     let response = [];
+    console.log('Os parametros ', user.perfilid, user.admin);
 
     if (user.perfilid === 8 || user.admin) {
       response = await api.get('/doc/all', {
