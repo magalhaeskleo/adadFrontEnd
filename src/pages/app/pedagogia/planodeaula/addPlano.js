@@ -121,8 +121,6 @@ export default function AddPlano({ openModal, onClose, callback }) {
   const [adadsSelected, setAdadsSelected] = useState([]);
   const [inserteAnexos, setAnexos] = useState([]);
 
-  console.log('inserteAnexos', inserteAnexos);
-
   const [init, setInit] = useState({
     divisa: '',
     tema: '',
@@ -157,13 +155,11 @@ export default function AddPlano({ openModal, onClose, callback }) {
     let resp = '';
 
     if (lideresSelected.length <= 0) {
-      console.log('campo deve ser preenchido');
       setError(true);
       return;
     }
 
     if (adadsSelected.length <= 0) {
-      console.log('campo deve ser preenchido');
       return;
     }
 
@@ -171,10 +167,6 @@ export default function AddPlano({ openModal, onClose, callback }) {
     let linkAnexo = '';
     const docList = inserteAnexos.find((i) => i.type === 'file');
     const linkList = inserteAnexos.find((i) => i.type === 'link');
-
-    console.log('docList', docList);
-    console.log('linkList', linkList);
-    console.log(' o insertselec', itemSelected);
 
     if (docList) {
       if (docList.value !== itemSelected.anexo) {
@@ -247,7 +239,6 @@ export default function AddPlano({ openModal, onClose, callback }) {
   }
 
   useEffect(() => {
-    console.log('selecionado', itemSelected);
     if (edit) {
       setInit({ ...itemSelected });
       setIdentificador(itemSelected.identificador);

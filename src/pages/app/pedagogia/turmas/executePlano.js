@@ -160,8 +160,6 @@ export default function ExecutePlano({
 
   const edit = !!itemSelecionado.idTurma;
 
-  console.log('como vem o item ', itemSelecionado);
-
   useEffect(() => {
     setChecked([]);
     if (itemSelecionado.alunosPresentes) {
@@ -227,7 +225,6 @@ export default function ExecutePlano({
       status: 2,
       id: itemSelecionado.id,
     });
-    console.log('veio o resp ', resp.data);
 
     if (resp.data.error) {
       console.log('deu ruim', resp.data);

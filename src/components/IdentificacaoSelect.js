@@ -36,7 +36,6 @@ export default function SelectIdentificador({ infantil, onChange }) {
   const [adultoIdentificacao] = useState(IDENTIFICACAO.filter((i) => i.id > 3));
 
   const handleChange = (event) => {
-    console.log('item selecionado', event.target.value);
     setItem(event.target.value);
     onChange(event.target.value);
   };
@@ -51,7 +50,7 @@ export default function SelectIdentificador({ infantil, onChange }) {
       },
     },
   };
-  console.log('itdentificadores', IDENTIFICACAO);
+
   useEffect(() => {
     if (infantil === null) {
       setItens(IDENTIFICACAO);
@@ -66,8 +65,6 @@ export default function SelectIdentificador({ infantil, onChange }) {
       );
     }
   }, [infantil]);
-
-  console.log('edit', edit, itemSelected);
 
   useEffect(() => {
     if (edit) {

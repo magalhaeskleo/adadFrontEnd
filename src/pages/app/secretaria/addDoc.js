@@ -72,7 +72,6 @@ export default function Addpage({
       setor: 0,
     };
 
-    console.log(form);
     const { data } = await api.post('/doc/add', form);
 
     clean();
@@ -81,7 +80,7 @@ export default function Addpage({
 
   async function createDoc() {
     const doc = inserteAnexos.find((item) => item.type === 'file');
-    console.log('file', doc);
+
     if (doc) {
       const fileData = new FormData();
       fileData.append('file', doc.file);

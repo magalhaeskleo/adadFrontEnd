@@ -205,7 +205,7 @@ function ResponsiveDrawer(props) {
             <ListItemText primary={'Pedagogia'} />
           </ListItem>
         )}
-        {user.admin && (
+        {user.admin && user.perfilid !== 8 && (
           <>
             <ListItem
               button

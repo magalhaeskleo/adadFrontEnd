@@ -41,7 +41,6 @@ export default function WebComponent({ setOpen, open, callbackWeb }) {
         now.getMonth() + 1
       }_${now.getFullYear()}_${now.getHours()}_${now.getMinutes()}_${now.getSeconds()}_image.png`
     );
-    console.log(file);
 
     callbackWeb(file);
     handleClose();

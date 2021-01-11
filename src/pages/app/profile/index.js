@@ -179,6 +179,7 @@ export default function Profile() {
       });
     return response;
   }
+  const habilitadoPerfil = profile.admin && profile.perfilid === 0;
 
   async function sendProfile(form) {
     if (!validandoCPF(form.cpf)) {
@@ -224,7 +225,7 @@ export default function Profile() {
     personalDocument: yup.string().required('Campo obrigatório'),
     neighborhood: yup.string().required('Campo obrigatório'),
   });
-  console.log('o profile', profile);
+
   const formikForm = (
     <Formik
       initialValues={{ ...profile }}
@@ -245,7 +246,7 @@ export default function Profile() {
         setFieldTouched,
       }) => {
         return (
-          <Form onChange={() => console.log(values)}>
+          <Form>
             <div>
               <Typography variant='subtitle1'>Dados Pessoais</Typography>
 
@@ -383,7 +384,7 @@ export default function Profile() {
                     labelId='select-perfil-label-id'
                     id='select-perfil-id'
                     value={perfilid}
-                    disabled={!profile.admin}
+                    disabled={!habilitadoPerfil}
                     onChange={handlePerfil}
                   >
                     {PERFIL_LIST.map((item) => (

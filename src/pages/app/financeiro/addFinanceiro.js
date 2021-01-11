@@ -53,7 +53,6 @@ export default function Addpage({
     if (edition) {
       resp = await api.put('/financeiro', newForm);
     } else {
-      console.log('entrando no add', newForm);
       resp = await api.post('/financeiro/add', newForm);
     }
 

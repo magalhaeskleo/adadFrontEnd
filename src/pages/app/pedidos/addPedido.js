@@ -198,7 +198,7 @@ export default function Addpage({
         setFieldValue,
       }) => {
         return (
-          <Form onChange={() => console.log(values)}>
+          <Form>
             <div
               style={{
                 marginTop: 20,

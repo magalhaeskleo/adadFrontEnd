@@ -67,20 +67,17 @@ export default function DocAuxiliar({ setPageReturn }) {
 
   async function getData() {
     let response = [];
-    console.log('Os parametros ', user.perfilid, user.admin);
 
-    if (user.perfilid === 8 || user.admin) {
+    if (user.admin) {
       response = await api.get('/doc/all', {
         headers: { setor: 1 },
       });
-
-      console.log('os documentos da pedagogia', response.data);
     } else {
       response = await api.get('/doc/setor', {
         headers: { nucleoid: user.nucleoid, setor: 1 },
       });
     }
-    console.log('os documentos da pedagogia', response.data);
+
     setList(response.data);
   }
   useEffect(() => {

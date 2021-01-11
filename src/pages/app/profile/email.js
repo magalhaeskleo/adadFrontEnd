@@ -47,7 +47,6 @@ export default function Addpage({ open, close, callback }) {
   async function sendEmail(form) {
     const newForm = { ...form, idPersonal: profile.id };
     const resp = await api.post('/changeEmail', newForm);
-    console.log('passou', resp.data);
 
     if (resp.data.error) {
       setMessage(resp.data.error);

@@ -26,33 +26,7 @@ export const PlanoProvider = ({ children }) => {
 
   const [total, setTotal] = useState(0);
   const { user } = useAuth();
-  /*
-  useEffect(() => {
-    async function buscar() {
-      await getDataServer(1);
-    }
-    buscar();
-  }, [loading]);
-  /*
-  async function getDataServer(page) {
-    const response = await api.get('pedido/all', {
-      headers: {
-        page: Number(page),
-      },
-    });
-    console.log('esta vindo no pedido provider', response.data);
 
-    if (!response.data.error) {
-      setTotal(response.data.total);
-      setDataList(response.data.listPedidos);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setLoading(false);
-      return response.data.listPedidos;
-    }
-    setLoading(false);
-    return [];
-  }
-*/
   return (
     <PlanoContext.Provider
       value={{

@@ -95,10 +95,8 @@ export default function Addpage({ open, close, callback }) {
     const newAvatar = await createAvatar();
 
     const newForm = { newAvatar, idPersonal: profile.id };
-    console.log(newForm);
 
     const resp = await api.post('/changeAvatar', newForm);
-    console.log('passou', resp.data);
 
     if (resp.data.error) {
       setMessage(resp.data.error);

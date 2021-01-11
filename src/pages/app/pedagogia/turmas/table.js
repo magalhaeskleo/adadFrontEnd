@@ -20,7 +20,8 @@ import moment from 'moment';
 import 'moment/locale/pt-br';
 import React, { useEffect, useState } from 'react';
 import { IDENTIFICACAO } from '../../../../components/constants';
-import NucleoSelect from '../../../../components/NucleoSelect';
+import NucleoSelectPegadogia from '../../../../components/NucleoSelectPegadogia';
+import { usePlano } from '../../../../context/app/plano';
 import api from '../../../../service/api';
 import ExecutePlano from './executePlano';
 
@@ -118,12 +119,13 @@ export default function StickyHeadTable({
 }) {
   const classes = useStyles();
   const [page, setPage] = useState(1);
-
+  const { user } = usePlano();
   const [dataList, setDataList] = useState([]);
 
   const [total, setTotal] = useState(0);
-  const [nucleoid, setNucleoId] = useState(1);
-
+  const [nucleoid, setNucleoId] = useState(
+    !user.admin || user.perfilid !== 8 ? user.nucleoid : 1
+  );
   const [selectedDate, setSelectedDate] = useState(moment());
   const [selectedYear, setSelectedYear] = useState(moment());
 
@@ -310,7 +312,7 @@ export default function StickyHeadTable({
       </div>
       {dateInput}
       <div className={classes.divNucleo}>
-        <NucleoSelect callbackNucleo={callbackNucleo} />
+        <NucleoSelectPegadogia callbackNucleo={callbackNucleo} />
       </div>
 
       <div className={classes.divWhitesmoke} />

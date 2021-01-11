@@ -47,7 +47,6 @@ export default function Addpage({ open, close, callback }) {
   async function sendSenha(form) {
     const newForm = { ...form, idPersonal: profile.id };
     const resp = await api.post('/changeSenha', newForm);
-    console.log('passou', resp.data);
 
     if (resp.data.error) {
       setMessage(resp.data.error);

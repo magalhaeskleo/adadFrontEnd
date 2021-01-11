@@ -142,7 +142,7 @@ export default function TablePedidos({
       setDataList([]);
     }
   }
-  console.log('a lista veio assim', dataListPedido);
+
   useEffect(() => {
     const listFormat = dataListPedido.map((item) =>
       createData(

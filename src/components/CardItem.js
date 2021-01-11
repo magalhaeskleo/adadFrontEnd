@@ -82,8 +82,6 @@ export default function CardItem({ icon, item, callback, handleVisualizar }) {
     window.open(value);
   }
 
-  console.log('como vem o item ', item);
-
   return (
     <div
       id='card_'

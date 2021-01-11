@@ -34,7 +34,6 @@ export const AuthProvider = ({ children }) => {
       if (storagedUser && storagedToken) {
         const userParse = JSON.parse(storagedUser);
         // const {}
-        console.log('veio no user storage', userParse);
 
         getProfile(userParse);
         setUser(userParse);
@@ -59,9 +58,10 @@ export const AuthProvider = ({ children }) => {
 
   async function alterStorageAndUser(id, email, password) {
     const resp = await api.get(`/personalData/${user.id}`);
-    setProfile({ ...resp.data, admin: resp.data.perfilid === 0 });
+    const admin = resp.data.perfilid === 0 || resp.data.perfilid === 8;
+    setProfile({ ...resp.data, admin });
 
-    const userForm = { ...resp.data, admin: resp.data.perfilid === 0 };
+    const userForm = { ...resp.data, admin };
 
     localStorage.setItem('@ADADAuth:user', JSON.stringify(userForm));
     setUser(userForm);
@@ -69,7 +69,8 @@ export const AuthProvider = ({ children }) => {
 
   async function getProfile(user) {
     const resp = await api.get(`/personalData/${user.id}`);
-    setProfile({ ...resp.data, admin: resp.data.perfilid === 0 });
+    const admin = resp.data.perfilid === 0 || resp.data.perfilid === 8;
+    setProfile({ ...resp.data, admin });
   }
 
   async function singIn(form) {
@@ -79,16 +80,18 @@ export const AuthProvider = ({ children }) => {
       return data.error;
     } else {
       const { user, token } = data;
-      console.log('user', user);
+
       api.defaults.headers.authorization = `Bearer ${token}`;
-      const userForm = { ...user, admin: user.perfilid === 0 };
+      const admin = user.perfilid === 0 || user.perfilid === 8;
+
+      const userForm = { ...user, admin };
 
       localStorage.setItem('@ADADAuth:user', JSON.stringify(userForm));
       localStorage.setItem('@ADADAuth:token', token);
 
       setUser(userForm);
       const resp = await api.get(`/personalData/${user.id}`);
-      setProfile({ ...resp.data, admin: resp.data.perfilid === 0 });
+      setProfile({ ...resp.data, admin });
     }
     return data;
   }

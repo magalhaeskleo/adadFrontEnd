@@ -22,7 +22,7 @@ import 'moment/locale/pt-br';
 import React, { useEffect, useState } from 'react';
 import { IDENTIFICACAO } from '../../../../components/constants';
 import IconButtonDelete from '../../../../components/IconButtonDelete';
-import NucleoSelect from '../../../../components/NucleoSelect';
+import NucleoSelectPegadogia from '../../../../components/NucleoSelectPegadogia';
 import { usePlano } from '../../../../context/app/plano';
 import api from '../../../../service/api';
 import ExecutePlano from '../turmas/executePlano';
@@ -211,7 +211,7 @@ export default function StickyHeadTable({
         page: 1,
       },
     });
-    console.log('passou no plano filter', listFilter);
+
     setTotal(listFilter.data.total);
 
     if (listFilter.data.list.length > 0) {
@@ -269,7 +269,7 @@ export default function StickyHeadTable({
         nucleoid: nucleoid,
       },
     });
-    console.log('a lista que vem no plano de auala', listFilter.data.list);
+
     setTotal(listFilter.data.total);
 
     if (listFilter.data.list.length > 0) {
@@ -367,7 +367,7 @@ export default function StickyHeadTable({
       </div>
       {dateInput}
       <div className={classes.divNucleo}>
-        <NucleoSelect callbackNucleo={callbackNucleo} />
+        <NucleoSelectPegadogia callbackNucleo={callbackNucleo} />
       </div>
 
       <div className={classes.divWhitesmoke} />

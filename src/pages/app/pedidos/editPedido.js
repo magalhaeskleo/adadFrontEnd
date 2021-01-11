@@ -239,7 +239,7 @@ export default function Editpage({ openModal, callback, initValue }) {
         setFieldValue,
       }) => {
         return (
-          <Form onChange={() => console.log(values)}>
+          <Form>
             <div
               style={{
                 marginTop: 20,

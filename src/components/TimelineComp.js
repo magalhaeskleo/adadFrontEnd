@@ -44,10 +44,8 @@ export default function TimelineComp({ statusPedido }) {
   const [statusNew] = useState([formatDate, '0', '0', '0', '0']);
 
   const Connector = <div className={classes.connector} />;
-  console.log('chegando o status ', statusPedido);
 
   useEffect(() => {
-    console.log('status pedido', statusPedido);
     if (statusPedido) {
       setStatusHistory(statusPedido);
     } else {

@@ -62,8 +62,6 @@ const nowFormat = `${now.getFullYear() - 6}-${
   now.getMonth() < 10 ? '' + now.getMonth() + 1 : now.getMonth() + 1
 }-${now.getDate() < 10 ? '0' + now.getDate() : now.getDate()}`;
 
-console.log('o data', nowFormat);
-
 const init = {
   fullName: '',
   cpf: '',

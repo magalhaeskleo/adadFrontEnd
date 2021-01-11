@@ -294,7 +294,7 @@ export default function AddPeople({
         setFieldTouched,
       }) => {
         return (
-          <Form onChange={() => console.log(values)}>
+          <Form>
             <div>
               <Typography variant='subtitle1'>Dados Pessoais</Typography>
               <div

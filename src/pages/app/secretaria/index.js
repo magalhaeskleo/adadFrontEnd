@@ -53,9 +53,9 @@ export default function DocAuxiliar({ setPageReturn }) {
   const [message, setMessage] = useState('');
   const [severity, setSeverity] = useState('success');
   const [itemSelected, setItemSelected] = useState('');
-  const [openVisu, setopenVisu] = useState(false);
+
   const [openSnack, setOpenSnack] = useState(false);
-  const [inserteAnexos, setAnexos] = useState();
+
   const { user } = useAuth();
 
   function handleVisualizar(item) {
@@ -71,7 +71,7 @@ export default function DocAuxiliar({ setPageReturn }) {
         setor: 0,
       },
     });
-    console.log('data como veio', response.data);
+
     if (response.data) {
       setList(response.data);
     }

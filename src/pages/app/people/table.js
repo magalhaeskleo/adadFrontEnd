@@ -232,14 +232,12 @@ export default function StickyHeadTable({ callbackEdit, callbackDelete }) {
 
   useEffect(() => {
     if (filterValue === '') {
-      console.log('filter useefect');
       setLoadingData(true);
       getData(1);
     }
   }, [filterValue]);
 
   useEffect(() => {
-    console.log('ativando o carregar');
     getData(1);
   }, [carregar]);
 

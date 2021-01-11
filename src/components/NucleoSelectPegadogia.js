@@ -45,7 +45,7 @@ export default function SimpleSelectNucleo({
       callbackNucleo(user.nucleoid);
     }
 
-    if (user.admin && user.perfilid !== 8) {
+    if (user.admin) {
       setDisabled(false);
     }
   }
