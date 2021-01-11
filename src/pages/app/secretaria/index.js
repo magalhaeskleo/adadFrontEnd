@@ -65,12 +65,22 @@ export default function DocAuxiliar({ setPageReturn }) {
   }
 
   async function getData() {
-    const response = await api.get('/doc/setor', {
-      headers: {
-        nucleoid: user.nucleoid,
-        setor: 0,
-      },
-    });
+    let response = [];
+
+    if (user.admin) {
+      response = await api.get('/doc/all', {
+        headers: {
+          setor: 0,
+        },
+      });
+    } else {
+      response = await api.get('/doc/setor', {
+        headers: {
+          nucleoid: user.nucleoid,
+          setor: 0,
+        },
+      });
+    }
 
     if (response.data) {
       setList(response.data);

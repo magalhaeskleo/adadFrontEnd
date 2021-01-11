@@ -135,6 +135,7 @@ export default function StickyHeadTable({
   function callbackAddPlano(status) {
     if (status === 'ok') {
       setOpenModal(false);
+      getData(1);
     }
   }
 

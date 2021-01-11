@@ -227,11 +227,11 @@ export default function ExecutePlano({
     });
 
     if (resp.data.error) {
-      console.log('deu ruim', resp.data);
+      callback('error', resp.data.error);
     } else {
+      callback('ok');
     }
-
-    callback('ok');
+    setAvaliacao('');
   }
 
   const handleClose = () => {
