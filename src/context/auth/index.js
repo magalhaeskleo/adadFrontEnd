@@ -44,6 +44,17 @@ export const AuthProvider = ({ children }) => {
     setLoadingPage(false);
   }, []);
 
+  async function checkResetLogin() {
+    const resp = await api.get('/reset', {
+      headers: {
+        id: user.id,
+      },
+    });
+    if (resp.data.error) {
+      logout();
+    }
+  }
+
   /*
   async function reset(form) {
     const { user, token } = form;

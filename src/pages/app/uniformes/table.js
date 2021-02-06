@@ -26,11 +26,11 @@ const columns = [
   {
     id: 'name',
     label: 'Nome',
-    maxWidth: 150,
+    maxWidth: 100,
     align: 'center',
   },
   { id: 'valor', label: 'Valor', maxWidth: 95, align: 'center' },
-  { id: 'action', label: '', maxWidth: 55, align: 'right' },
+  { id: 'action', label: '', maxWidth: 60, align: 'right' },
 ];
 
 function createData(item, name, valor, action) {

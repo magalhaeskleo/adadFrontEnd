@@ -55,6 +55,7 @@ export default function Addpage({
     setFileSelect();
     setUrl();
     setName();
+    setAnexos([]);
   }
   const handleClose = () => {
     clean();

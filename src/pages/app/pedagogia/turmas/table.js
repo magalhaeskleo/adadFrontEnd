@@ -20,6 +20,7 @@ import moment from 'moment';
 import 'moment/locale/pt-br';
 import React, { useEffect, useState } from 'react';
 import { IDENTIFICACAO } from '../../../../components/constants';
+import LoadingPage from '../../../../components/LoadingPage';
 import NucleoSelectPegadogia from '../../../../components/NucleoSelectPegadogia';
 import { usePlano } from '../../../../context/app/plano';
 import api from '../../../../service/api';
@@ -131,6 +132,7 @@ export default function StickyHeadTable({
 
   const [openModal, setOpenModal] = useState(false);
   const [itemSelecionado, setItemSelecionado] = useState('');
+  const [loading, setLoading] = useState(false);
 
   function callbackAddPlano(status) {
     if (status === 'ok') {
@@ -236,7 +238,7 @@ export default function StickyHeadTable({
         nucleoid: nucleoid,
       },
     });
-
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     setTotal(listFilter.data.total);
 
     if (listFilter.data.list.length > 0) {
@@ -254,9 +256,12 @@ export default function StickyHeadTable({
     } else {
       setDataList([]);
     }
+
+    setLoading(false);
   }
 
   useEffect(() => {
+    setLoading(true);
     getData(1);
     // setCarregar(false);
   }, []);
@@ -377,8 +382,8 @@ export default function StickyHeadTable({
   const section = (
     <Paper className={classes.root}>
       {search}
-      {/*loadingNucleos ? <LoadingPage /> : tableList*/}
-      {tableList}
+      {loading ? <LoadingPage /> : tableList}
+
       <TablePagination
         rowsPerPageOptions={[10]}
         component='div'
@@ -401,3 +406,4 @@ export default function StickyHeadTable({
 
   return section;
 }
+/**  {loadingData ? <LoadingPage /> : tableList} */

@@ -30,11 +30,11 @@ import { useAuth } from '../../../context/auth';
 import api from '../../../service/api';
 
 const columns = [
-  { id: 'descricao', label: 'Descricao', maxWidth: 100, align: 'center' },
+  { id: 'descricao', label: 'Descricao', maxWidth: 90, align: 'center' },
   { id: 'type', label: 'Tipo', maxWidth: 80, align: 'center' },
   { id: 'valor', label: 'Valor', maxWidth: 80, align: 'center' },
-  { id: 'nucleo', label: 'Nucleo', maxWidth: 50, align: 'center' },
-  { id: 'action', label: '', maxWidth: 50, align: 'right' },
+  { id: 'nucleo', label: 'Nucleo', maxWidth: 80, align: 'center' },
+  { id: 'action', label: '', maxWidth: 60, align: 'right' },
 ];
 
 function createData(id, descricao, type, valor, nucleo, action) {

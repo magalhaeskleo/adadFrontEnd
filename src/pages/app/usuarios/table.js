@@ -271,7 +271,7 @@ export default function StickyHeadTable({ callbackEdit, callbackDelete }) {
                 align={column.align}
                 variant='head'
                 className={
-                  index > 1 && index < 3 ? classes.headerTableHide : ''
+                  index > 0 && index < 3 ? classes.headerTableHide : ''
                 }
                 style={{
                   maxWidth: column.maxWidth,
@@ -290,7 +290,7 @@ export default function StickyHeadTable({ callbackEdit, callbackDelete }) {
                   const value = row[column.id];
                   return (
                     <TableCell
-                      className={i > 1 && i < 3 ? classes.headerTableHide : ''}
+                      className={i > 0 && i < 3 ? classes.headerTableHide : ''}
                       key={column.id}
                       align={column.align}
                       style={{

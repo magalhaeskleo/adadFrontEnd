@@ -39,7 +39,7 @@ const columns = [
   { id: 'total', label: 'Total', maxWidth: 100, align: 'center' },
   { id: 'status', label: 'Status', maxWidth: 80, align: 'center' },
   { id: 'nucleo', label: 'Nucleo', maxWidth: 100, align: 'center' },
-  { id: 'action', label: '', maxWidth: 55, align: 'right' },
+  { id: 'action', label: '', maxWidth: 60, align: 'center' },
 ];
 
 function createData(
