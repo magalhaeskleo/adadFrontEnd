@@ -22,18 +22,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SelectIdentificador({ infantil, onChange }) {
+export default function SelectIdentificador({ onChange }) {
   const classes = useStyles();
   const { itemSelected, edit } = usePlano();
 
   const [itens, setItens] = useState(IDENTIFICACAO);
   const [item, setItem] = useState(1);
-
-  const [infantilIdentificacao] = useState(
-    IDENTIFICACAO.filter((i) => i.id < 4)
-  );
-
-  const [adultoIdentificacao] = useState(IDENTIFICACAO.filter((i) => i.id > 3));
 
   const handleChange = (event) => {
     setItem(event.target.value);
@@ -52,23 +46,15 @@ export default function SelectIdentificador({ infantil, onChange }) {
   };
 
   useEffect(() => {
-    if (infantil === null) {
-      setItens(IDENTIFICACAO);
-      setItem(IDENTIFICACAO[0].id);
-    } else {
-      setItens(infantil ? infantilIdentificacao : adultoIdentificacao);
-      setItem(
-        infantil ? infantilIdentificacao[0].id : adultoIdentificacao[0].id
-      );
-      onChange(
-        infantil ? infantilIdentificacao[0].id : adultoIdentificacao[0].id
-      );
-    }
-  }, [infantil]);
+    setItens(IDENTIFICACAO);
+    setItem(IDENTIFICACAO[0].id);
+    onChange(IDENTIFICACAO[0].id);
+  }, []);
 
   useEffect(() => {
     if (edit) {
       setItem(itemSelected.identificador);
+      onChange(IDENTIFICACAO[0].id);
     } else {
       setItem(1);
     }

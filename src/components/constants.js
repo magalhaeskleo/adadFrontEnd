@@ -12,6 +12,22 @@ export const PERFIL_LIST = [
 
 export const TAMANHO_INFANTIL = [2, 3, 4, 6, 8, 12, 16];
 export const TAMANHO_ADULTO = ['P', 'M', 'G', 'GG', 'XG', 'XGG', 'NOBRE'];
+export const TAMANHO_PEDIDOS = [
+  '2',
+  '3',
+  '4',
+  '6',
+  '8',
+  '12',
+  '16',
+  'P',
+  'M',
+  'G',
+  'GG',
+  'XG',
+  'XGG',
+  'NOBRE',
+];
 export const IDENTIFICACAO = [
   {
     id: 1,

@@ -62,19 +62,34 @@ const useStyles = makeStyles((theme) => ({
 export default function TableItensPedidos({ listItens, deleteItemList }) {
   const classes = useStyles();
   const [dataList, setDataList] = useState([]);
+  const [identificacaoColor, setIdentificacaoColor] = useState(IDENTIFICACAO);
+
+  const identificadorColor = (item) => {
+    console.log('o item veio', item);
+
+    console.log(
+      'intentif',
+      IDENTIFICACAO.filter(({ id }) => Number(id) === Number(item))
+    );
+
+    const color = IDENTIFICACAO.find((i) => Number(i.id) === 1).color;
+
+    console.log('item', item, color);
+    return color;
+  };
 
   useEffect(() => {
+    console.log('lista itens ', listItens);
     const listFormat =
       listItens.length > 0
         ? listItens.map((item) => {
-            const colorId = IDENTIFICACAO.find(
-              (i) => i.id === item.identification
-            ).color;
-
             return createData(
               item.index,
               item.name,
-              <Typography variant='body2' style={{ color: colorId }}>
+              <Typography
+                variant='body2'
+                style={{ color: identificadorColor(item.identification) }}
+              >
                 {`${item.tamanho}-:-${item.numeracao}`}
               </Typography>,
               item.quantidade,

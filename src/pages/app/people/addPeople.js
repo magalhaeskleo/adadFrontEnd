@@ -100,6 +100,7 @@ export default function AddPeople({
   const { user } = useAuth();
   const horizontal = 'center';
   const vertical = 'top';
+  const adad = 7;
 
   useEffect(() => {
     if (edition) {
@@ -192,12 +193,13 @@ export default function AddPeople({
   const [openaAlert, setOpenAlert] = useState(false);
 
   async function sendMatricula(form) {
-    if (!validandoCPF(form.cpf)) {
-      setMessage('O cpf esta inválido');
-      setSeverity('warning');
-      setOpenAlert(true);
-
-      return;
+    if (form.cpf !== '') {
+      if (!validandoCPF(form.cpf)) {
+        setMessage('O cpf esta inválido');
+        setSeverity('warning');
+        setOpenAlert(true);
+        return;
+      }
     }
 
     let avatar = '';
@@ -250,8 +252,8 @@ export default function AddPeople({
 
   const validation = yup.object().shape({
     fullName: yup.string().required('Campo obrigatório'),
-    cpf: yup.string().min(11, 'Número inválido').required('Campo obrigatório'),
-    email: yup.string().email('E-mail inválido').required('Campo obrigatório'),
+    cpf: yup.string().min(11, 'Número inválido'),
+    email: yup.string().email('E-mail inválido'),
     phone: yup
       .string()
       .min(18, 'Número inválido')
@@ -260,8 +262,8 @@ export default function AddPeople({
     number: yup.string().required('Campo obrigatório'),
     city: yup.string().required('Campo obrigatório'),
     state: yup.string().required('Campo obrigatório'),
-    personalDocument: yup.string().required('Campo obrigatório'),
     neighborhood: yup.string().required('Campo obrigatório'),
+    denomination: yup.string().required('Campo obrigatório'),
   });
 
   async function buscarCep(cep) {
@@ -371,7 +373,7 @@ export default function AddPeople({
 
                 <TextField
                   style={{ width: '96%' }}
-                  label='E-mail'
+                  label={adad === perfilid ? 'E-mail do responsável' : 'E-mail'}
                   name='email'
                   size='small'
                   value={values.email}
@@ -386,7 +388,9 @@ export default function AddPeople({
                   style={{ width: '96%', marginTop: 30 }}
                   defaultCountry={'br'}
                   onlyCountries={['br', 'es', 'ar']}
-                  label='Telefone'
+                  label={
+                    adad === perfilid ? 'Telefone do responsável' : 'Telefone'
+                  }
                   name='phone'
                   size='small'
                   value={values.phone}
@@ -537,7 +541,7 @@ export default function AddPeople({
                 />
               </div>
 
-              {perfilid === 7 && (
+              {perfilid === adad && (
                 <TextField
                   style={{ width: '96%', marginTop: 10 }}
                   label='Nome do pai'
@@ -555,7 +559,7 @@ export default function AddPeople({
                   }
                 />
               )}
-              {perfilid === 7 && (
+              {perfilid === adad && (
                 <TextField
                   style={{ width: '96%', marginTop: 20 }}
                   label='Nome da mãe'

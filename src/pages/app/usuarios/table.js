@@ -96,7 +96,7 @@ export default function StickyHeadTable({ callbackEdit, callbackDelete }) {
   async function getData(newPage) {
     const list = await getDataUser(newPage);
 
-    if (list) {
+    if (list.length > 0) {
       const listFormat = list.map((item) =>
         createData(
           item.personal.id,

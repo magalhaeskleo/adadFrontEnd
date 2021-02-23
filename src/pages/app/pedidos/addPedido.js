@@ -276,7 +276,6 @@ export default function Addpage({
                 </Badge>
 
                 <SelectIdentificador
-                  infantil={values.tamanho === 'infantil'}
                   onChange={(e) => setFieldValue('identification', e)}
                 />
                 <Fab
@@ -368,7 +367,7 @@ export default function Addpage({
         aria-describedby='alert-dialog-description'
       >
         <DialogTitle id='alert-dialog-title'>
-          {'Deseja excluir esse item ?'}
+          {'Deseja cancelar esse item ?'}
         </DialogTitle>
 
         <DialogActions>

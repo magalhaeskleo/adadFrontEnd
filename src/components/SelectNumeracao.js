@@ -4,7 +4,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { useEffect, useState } from 'react';
-import { TAMANHO_ADULTO, TAMANHO_INFANTIL } from './constants';
+import { TAMANHO_INFANTIL, TAMANHO_PEDIDOS } from './constants';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -23,15 +23,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SelectNumeracao({ onChange, onBlur, infantil }) {
   const classes = useStyles();
-  const [Itens, setItens] = useState(TAMANHO_INFANTIL);
+  const [Itens, setItens] = useState(TAMANHO_PEDIDOS);
 
-  const [item, setItem] = useState(TAMANHO_INFANTIL[0]);
+  const [item, setItem] = useState(TAMANHO_PEDIDOS[0]);
 
   useEffect(() => {
-    setItens(infantil ? TAMANHO_INFANTIL : TAMANHO_ADULTO);
-    setItem(infantil ? TAMANHO_INFANTIL[0] : TAMANHO_ADULTO[0]);
-    onChange(infantil ? TAMANHO_INFANTIL[0] : TAMANHO_ADULTO[0]);
-  }, [infantil]);
+    setItens(TAMANHO_PEDIDOS);
+    setItem(TAMANHO_PEDIDOS[0]);
+    onChange(TAMANHO_INFANTIL[0]);
+  }, []);
 
   const handleChange = (event) => {
     setItem(event.target.value);

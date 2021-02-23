@@ -13,7 +13,6 @@ const PeopleContextData = {
   dataListServer: [],
   loadingData: false,
   total: 0,
-  getDataUser: () => {},
   getUserFilter: () => {},
   totalUser: 0,
   setCarregar: () => {},

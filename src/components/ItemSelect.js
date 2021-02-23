@@ -31,13 +31,15 @@ export default function SimpleSelectItem({ onChange }) {
 
   async function getData() {
     const response = await api.get('/uniforme/all');
-    setItems(response.data);
-    setItem(response.data[0].id);
-    onChange({
-      uniformeid: response.data[0].id,
-      name: response.data[0].name,
-      valor: response.data[0].valor,
-    });
+    if (response.data.length > 0) {
+      setItems(response.data);
+      setItem(response.data[0].id);
+      onChange({
+        uniformeid: response.data[0].id,
+        name: response.data[0].name,
+        valor: response.data[0].valor,
+      });
+    }
     // callbackItem(user.Itemid);
   }
 
@@ -73,10 +75,10 @@ export default function SimpleSelectItem({ onChange }) {
     <FormControl className={classes.formControl}>
       <InputLabel id='select-Item'>Item</InputLabel>
       <Select
-        id='demo-mutiple-chip'
+        id='uniformeid'
         value={Item}
         onChange={handleChange}
-        input={<Input id='select-Item' />}
+        input={<Input id='select-Item-uniforme' />}
         MenuProps={MenuProps}
       >
         {itens.map((item) => (
