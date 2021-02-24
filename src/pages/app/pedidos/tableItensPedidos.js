@@ -65,21 +65,11 @@ export default function TableItensPedidos({ listItens, deleteItemList }) {
   const [identificacaoColor, setIdentificacaoColor] = useState(IDENTIFICACAO);
 
   const identificadorColor = (item) => {
-    console.log('o item veio', item);
-
-    console.log(
-      'intentif',
-      IDENTIFICACAO.filter(({ id }) => Number(id) === Number(item))
-    );
-
     const color = IDENTIFICACAO.find((i) => Number(i.id) === 1).color;
-
-    console.log('item', item, color);
     return color;
   };
 
   useEffect(() => {
-    console.log('lista itens ', listItens);
     const listFormat =
       listItens.length > 0
         ? listItens.map((item) => {

@@ -238,7 +238,6 @@ export default function AddPeople({
       const resp = await api.post('/personaldata/add', formEnv);
       data = resp.data;
     }
-    console.log('como veio a edição', data);
 
     if (data.error) {
       callbackPersonal(false, data.error);
@@ -276,6 +275,7 @@ export default function AddPeople({
       });
     return response;
   }
+  async function comprovacaoDosPais() {}
 
   const formikForm = (
     <Formik

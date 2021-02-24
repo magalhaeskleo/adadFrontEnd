@@ -91,9 +91,9 @@ export default function Nucleo() {
     if (item) {
       const response = await api.put(`/nucleo/deactivate/${item.id}`);
 
-      if (response.error) {
+      if (response.data.error) {
         setSeverity('warning');
-        setMessage(response.error);
+        setMessage(response.data.error);
       } else {
         setSeverity('success');
         setMessage('Ação realizda com sucesso');
